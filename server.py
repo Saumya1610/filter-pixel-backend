@@ -48,12 +48,12 @@ def get_exif_data(file_path):
         print(f"Error processing {file_path}: {e}")
         return {"file_path": file_path, "error": str(e)}
 
-@app.route('/exif', methods=['GET'])
+@app.route('/', methods=['GET'])
 def exif_data_route():
     assets_dir = os.path.join(app.root_path, 'assets')
     image_paths = [os.path.join(assets_dir, f) for f in os.listdir(assets_dir) if f.lower().endswith(('.nef', '.dng', '.arw', '.pef', '.orf', '.dcr'))]
     exif_results = [get_exif_data(path) for path in image_paths]
     return jsonify(exif_results)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
